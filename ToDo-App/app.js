@@ -1,31 +1,48 @@
-let todo = [];
-let req = prompt("please enter your request");
+let addTask = document.querySelector('button');
+let tasks = document.querySelector('input');
+let taskList = document.querySelector('ul')
 
-while(true){
-    if(req=="quit"){
-        console.log("quitting app");
-        break;
-    }
+addTask.addEventListener("click", function(){
 
-    if(req == "list"){
-        console.log("---------------");
-        for(let i=0; i<todo.length; i++){
-            console.log(i,todo[i]);
-        } 
-        console.log("--------------");       
-    } else if(req == "add"){
-        let task =prompt("please enter the task");
-        todo.push(task)
-        console.log("task added");
+    let item = document.createElement('li')
+    item.innerText=tasks.value;
+   
 
-    }   else if(req== "delete"){
-        let idx =  parseInt(prompt("please enter the task index"));
-        todo.splice(idx,1);
-        console.log("task deleted");
+    let delbtn = document.createElement("button");
+    delbtn.classList.add("delete-btn");
+    delbtn.innerText= "delete";
 
-    } else{
-        console.log("wrong request");
-    }
 
-    req = prompt("please enter your request");
-} 
+    item.appendChild(delbtn)
+    taskList.appendChild(item)
+
+   tasks.value = "";
+
+     
+})
+
+
+// let delbtns = document.querySelectorAll(".delet-btn");
+
+// for(let delbtn of delbtns){
+//    delbtn.addEventListener('click', function(){
+//        let par = delbtn.parentElement;
+//        console.log(par);
+//        par.remove();
+//     })
+// }
+
+
+
+// Event Delegation
+
+taskList.addEventListener("click", function(event){
+   if ( event.target.nodeName =="BUTTON"){
+    let listIteam = event.target.parentElement;
+    console.log(listIteam);
+    listIteam.remove();
+    
+   
+   }
+   
+})
