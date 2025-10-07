@@ -1,0 +1,24 @@
+body{
+  background-color: rgba(72, 163,0,0.07);
+  font-family: 'poppins',sans-serif;
+}
+
+.title{
+  font-size: 64px;
+  color: #48A300;
+  text-align: center;
+  
+}
+.title span {
+  color:#61481C ;
+}
+
+.app-container{
+  background-color: #FBFBFB;
+  max-width: 660PX;
+  margin-inline: auto;
+  border-radius: 15px;
+  padding: 32px 42px;
+  box-shadow:0 0 10px 5px rgba(0,0,0,0.09) ;
+
+}
