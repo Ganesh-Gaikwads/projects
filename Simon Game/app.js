@@ -58,7 +58,7 @@
 
 function checkAns(Idx){
   
-  let idx = level-1;
+  let idx = userSeq.level-1;
 
   if( userSeq[idx]===gameSeq[idx]){
      if(userSeq.length === gameSeq.length){
