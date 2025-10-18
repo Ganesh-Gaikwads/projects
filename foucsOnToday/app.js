@@ -5,6 +5,11 @@ const progressBar = document.querySelector('.progress-bar');
 const progressValue = document.querySelector('.progress-value')
 
 
+ const allGaols = JSON.parse( localStorage.getItem('allGaols')) || {}
+ 
+
+
+
 
 
 checkList.forEach((checkBox)=>{
@@ -29,6 +34,16 @@ inputFields.forEach((input)=>{
   input.addEventListener('focus',()=>{
     progressBar.classList.remove('show-error')
   })
+ 
+  input.addEventListener('input', (e)=>{
+    allGaols[input.id]= {
+     name: input.value,
+     completed : false,
+    }
+
+    localStorage.setItem('allGoals',JSON.stringify(allGaols))
+  })
+
 })
 
  
