@@ -1,0 +1,37 @@
+ body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blueviolet;
+  color: white;
+ }
+
+ .container {
+  margin-bottom: 15rem;
+  text-align: center;
+  border: solid gray;
+  padding: 30px 120px;
+  border-radius: 18px;
+  border: none;
+  background-color: rgb(11, 64, 120);
+ }
+
+ #output {
+  font-size: 4rem;
+  margin-bottom: 20px;
+ }
+
+ button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 18px;
+  border: none;
+ }
+
+
+ button:hover{
+  background-color: rgb(93, 201, 255);
+ }
