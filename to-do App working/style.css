@@ -1,0 +1,14 @@
+.completed {
+color: rgb(12, 116, 80);
+text-decoration-line: line-through  ;
+text-decoration-color: rgb(0, 0, 0);
+text-decoration-thickness: 1.5px;
+line-height: 1.5px;
+ 
+ 
+}
+
+
+body {
+  cursor: pointer;
+}
