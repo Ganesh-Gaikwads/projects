@@ -1,28 +1,29 @@
-// access the elements
+ // access the elements
 
- 
 
 const input = document.querySelector("#inputTask");
 const addBtn = document.querySelector("button");
 const tasks = document.querySelector("#lists");
 
 
-
-
 let todos = [];
-let savedTodo =  localStorage.getItem('todos');
 
-if(savedTodo != null){
-  
-  todos = JSON.parse(savedTodo)
+// load saved todos
 
-  for(let i= 0; i<todos.length; i++){
-    addTask(todos[i].text);
-  }
- 
+let savedTodos = localStorage.getItem('todos');
+
+if(savedTodos !== null){
+  todos = JSON.parse(savedTodos);
+
+  // Display each todo
+
+todos.forEach(el => {
+   addTask(el.text, el.id)
+});
+
 }
 
- 
+
 
 // addBtn
 
@@ -31,50 +32,85 @@ addBtn.addEventListener("click", function () {
   input.value = "";
 });
 
+
 // add task when user click enter key
 
-input.addEventListener("keydown",function(e){
-  if(e.code==="Enter"){
+input.addEventListener("keydown", function (e) {
+  if (e.code === "Enter") {
     taskHandler();
-    input.value ="";
+    input.value = "";
   }
-})
-
-
-
+});
 
 
 // Add task function
 
-function addTask(task) {
+function addTask(task , id) {
   let lis = document.createElement("li");
   lis.textContent = task;
   tasks.appendChild(lis);
 
-// adding delet btn to delet task
 
-let delBtn = document.createElement("button");
-    delBtn.textContent = "remove";
-    lis.appendChild(delBtn)
-   
-    delBtn.addEventListener("click", function(){
-      this.parentElement.remove();
-    }) 
+ // check if this todo is completed
+
+ const todo = todos.find(t=>t.id ===id);
+ if(todo && todo.completed){
+  lis.classList.add("completed")
+ }
 
 
- // task completed feature 
+
+
+
+
+
+  // adding delet btn to delet task
+
+  let delBtn = document.createElement("button");
+  delBtn.textContent = "remove";
+  lis.appendChild(delBtn);
+
+  delBtn.addEventListener("click", function () {
   
- 
-  lis.addEventListener("click",function(){
-  lis.classList.toggle("completed");
-  })
+    // find index of this todo in the array
+
+    const index = todos.findIndex(todo=> todo.id ===id);
+
+    // remove form array 
+
+    todos.splice(index, 1);
 
 
- 
+    // update localStoarage
+
+    localStorage.setItem('todos', JSON.stringify(todos));
 
 
+// remove form screen
+    this.parentElement.remove();
+  });
+
+
+
+  // task completed feature
+
+  lis.addEventListener("click", function () {
+    // Toggle the css class
+    lis.classList.toggle("completed");
+
+    // find the todo in the array
+    const todo = todos.find(t=>t.id ===id);
+
+    // toggle the completed property
+
+    todo.completed = !todo.completed;
+
+    //save to localStorage
+
+    localStorage.setItem('todos', JSON.stringify(todos))
+
+  });
 }
-
 
 
 
@@ -86,62 +122,27 @@ function taskHandler() {
     return;
   }
 
- 
- const todo = { text: task , completed :false }
-todos.push(todo);
- 
+  // create todo object
 
-localStorage.setItem('todos', JSON.stringify(todos))
+  const todo = {
+    id: Date.now(),
+    text:task,
+    completed:false
+  }
  
+  // add to array
+ 
+  todos.push(todo)
 
- addTask(task);
+// Save to localStorage
+
+localStorage.setItem('todos', JSON.stringify(todos));
+
+  addTask(task, todo.id);
   input.value = "";
 }
 
 
-
-
-
-// get good with local starage
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // work on building more good logic and add local storage function
+ 
+ 
  
