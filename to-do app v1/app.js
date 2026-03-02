@@ -1,53 +1,34 @@
-// first we access html elements
+// accessing elements
 
-const input = document.querySelector("#inputTask");
+const input = document.querySelector("#input");
 const btn = document.querySelector("button");
-const list = document.querySelector("#lists");
+const list = document.querySelector(".list ul");
 
-//  add task to to-do using Add task btn
+// adding  eventlistner to add
 
-btn.addEventListener("click", () => {
-  handleTask();
+
+btn.addEventListener("click", function () {
+  let task = input.value;
+  render(task);
+
+  input.value = "";
 });
 
-// add task ot todo using enter key
 
-input.addEventListener("keydown", (e) => {
-  if (e.code === "Enter") handleTask();
-});
+// render events
 
-// addTodo function to show data on ui
+function render(task) {
+  let tasks = document.createElement("li");
+  let delBtn = document.createElement("button");
 
-function addTodo(task) {
-  const lis = document.createElement("li");
-  lis.textContent = task;
-
-  const delBtn = document.createElement("button");
-  delBtn.innerText = "x";
+  tasks.textContent = task;
+  delBtn.textContent = "del";
 
   delBtn.addEventListener("click", function () {
+    // remove elment form screen
     this.parentElement.remove();
-    console.log("task deleted");
   });
 
-  // added featire of task is completed make it green and overline
-
-  lis.addEventListener("click", () => {
-    lis.classList.toggle("completed");
-  });
-
-  lis.appendChild(delBtn);
-  list.appendChild(lis);
-}
-
-// handle task
-
-function handleTask() {
-  const task = input.value.trim();
-  if (task === "") {
-    return;
-  }
-
-  addTodo(task);
-  input.value = "";
+  tasks.appendChild(delBtn);
+  list.appendChild(tasks);
 }
